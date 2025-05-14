@@ -28,4 +28,24 @@ class PostController extends Controller
 
     return view('posts.show', compact('post'));
     }
+
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated=$request->validate([
+            'title'=>'required|max:20',
+            'content'=>'required|max:200',
+        ]);
+
+        Post::create([
+            'title'=>$validated['title'],
+            'content'=>$validated['content'],
+        ]);
+
+        return redirect('/posts');
+    }
 }
