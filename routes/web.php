@@ -19,7 +19,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/posts/create',[PostController::class,'create'])->name('post.create');
-Route::post('/posts/store',[PostController::class,'store'])->name('posts.store');
+Route::get('/posts/create',[PostController::class,'create'])->name('post.create')->middleware('auth');
+Route::post('/posts/store',[PostController::class,'store'])->name('posts.store')->middleware('auth');
 Route::get('/posts',[PostController::class,'index']);
 Route::get('/posts/{id}',[PostController::class,'show']);
+require __DIR__.'/auth.php';
